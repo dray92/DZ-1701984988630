@@ -1,0 +1,53 @@
+dev:
+  commands:
+  - command: dotnet restore
+    directory: microservices-demo
+    name: install cmd
+  - command: terraform init
+    directory: microservices-demo/terraform
+    name: install cmd
+  - command: dotnet restore
+    directory: microservices-demo/src
+    name: install cmd
+  - command: go mod download
+    directory: microservices-demo/src/productcatalogservice
+    name: install cmd
+  - command: python -m venv --copies ~/.venv && . ~/.venv/bin/activate && pip install
+      -r requirements.txt
+    directory: microservices-demo/src/adservice/src/main/resources
+    name: install cmd
+  - command: go mod download
+    directory: microservices-demo/src/loadgenerator
+    name: install cmd
+  - command: python -m venv --copies ~/.venv && . ~/.venv/bin/activate && pip install
+      -r requirements.txt
+    directory: microservices-demo/src/shippingservice/genproto
+    name: install cmd
+  - command: python -m venv --copies ~/.venv && . ~/.venv/bin/activate && pip install
+      -r requirements.txt
+    directory: microservices-demo/src/recommendationservice
+    name: install cmd
+  - command: go mod download
+    directory: microservices-demo/src/emailservice/templates
+    name: install cmd
+  - command: go mod download
+    directory: microservices-demo/src/paymentservice/proto/grpc/health
+    name: install cmd
+  - command: dotnet restore
+    directory: microservices-demo/src/currencyservice/proto/grpc/health
+    name: install cmd
+  - command: dotnet restore
+    directory: microservices-demo/src/currencyservice/proto/grpc/health/v1
+    name: install cmd
+  - command: dotnet restore
+    directory: microservices-demo/src/cartservice/src/cartstore
+    name: install cmd
+  name: ""
+  packages:
+  - nixpkgs.dotnet-sdk
+  - nixpkgs.gcc
+  - nixpkgs.go_1_19
+  - nixpkgs.python38
+  - nixpkgs.terraform
+  repos:
+  - https://github.com/GoogleCloudPlatform/microservices-demo
